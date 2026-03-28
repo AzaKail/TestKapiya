@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Капия Максутова — Врач, психолог и коуч</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --violet: #7B5EA7;
+    --violet-light: #A78BC7;
+    --violet-pale: #EDE6F5;
+    --beige: #F2EBE0;
+    --beige-dark: #D9CBBF;
+    --white: #FDFAF7;
+    --text-dark: #2C2340;
+    --text-mid: #5C4F72;
+    --text-light: #9B8FAA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(253, 250, 247, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(123, 94, 167, 0.12);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600;
+    color: var(--violet); letter-spacing: 0.5px;
+  }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: 14px; font-weight: 400; letter-spacing: 0.8px;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--violet); }
+  .nav-cta {
+    background: var(--violet); color: #fff !important;
+    padding: 10px 24px; border-radius: 30px;
+    font-weight: 500 !important; transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: #5f4690 !important; color: #fff !important; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    background: linear-gradient(135deg, var(--beige) 0%, var(--violet-pale) 100%);
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; top: -120px; right: -120px;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(123,94,167,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  #hero::after {
+    content: '';
+    position: absolute; bottom: -80px; left: 10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(167,139,199,0.14) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 60px 80px 80px; position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(123,94,167,0.12);
+    color: var(--violet); font-size: 11px;
+    font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    padding: 7px 18px; border-radius: 20px; margin-bottom: 28px;
+    width: fit-content;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300; line-height: 1.2;
+    color: var(--text-dark); margin-bottom: 20px;
+  }
+  .hero-title em { font-style: italic; color: var(--violet); }
+  .hero-subtitle {
+    font-size: 16px; color: var(--text-mid);
+    line-height: 1.7; max-width: 420px; margin-bottom: 40px;
+    font-weight: 300;
+  }
+  .hero-cta-group { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    background: var(--violet); color: #fff;
+    padding: 15px 34px; border-radius: 35px;
+    text-decoration: none; font-size: 15px; font-weight: 500;
+    display: flex; align-items: center; gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 30px rgba(123,94,167,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(123,94,167,0.45); }
+  .btn-secondary {
+    color: var(--violet); font-size: 14px; font-weight: 500;
+    text-decoration: none; border-bottom: 1px solid var(--violet-light);
+    padding-bottom: 2px; transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: #5f4690; }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px;
+    padding-top: 40px; border-top: 1px solid rgba(123,94,167,0.15);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px; font-weight: 600; color: var(--violet); line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+
+  .hero-image {
+    display: flex; align-items: flex-end; justify-content: center;
+    position: relative; z-index: 2;
+    padding: 0 40px;
+  }
+  .hero-photo-wrap {
+    position: relative;
+    width: 360px; max-width: 100%;
+  }
+  .hero-photo-bg {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 320px; height: 420px;
+    background: linear-gradient(180deg, var(--violet-light) 0%, var(--violet) 100%);
+    border-radius: 200px 200px 0 0; opacity: 0.18;
+  }
+  .hero-photo-placeholder {
+    position: relative; z-index: 2;
+    width: 100%; height: 520px;
+    background: linear-gradient(160deg, #c9b8e0 0%, #a07fc5 60%, #7B5EA7 100%);
+    border-radius: 200px 200px 0 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.7); font-size: 14px; text-align: center; gap: 12px;
+  }
+  .hero-photo-placeholder svg { opacity: 0.5; }
+  .hero-tag {
+    position: absolute; top: 60px; right: -20px;
+    background: #fff; border-radius: 16px;
+    padding: 14px 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    font-size: 13px; color: var(--text-mid);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-tag-dot { width: 8px; height: 8px; background: #6FCF97; border-radius: 50%; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 80px; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--violet-light);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 3vw, 50px);
+    font-weight: 300; line-height: 1.2; color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+  .section-title em { font-style: italic; color: var(--violet); }
+  .section-desc {
+    font-size: 16px; color: var(--text-mid); line-height: 1.8;
+    max-width: 540px; font-weight: 300;
+  }
+
+  /* ─── PROBLEMS ─── */
+  #problems { background: var(--white); }
+  .problems-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px; margin-top: 56px;
+  }
+  .problem-card {
+    background: var(--beige);
+    border-radius: 24px; padding: 36px 32px;
+    position: relative; overflow: hidden;
+    transition: transform 0.25s;
+  }
+  .problem-card:hover { transform: translateY(-4px); }
+  .problem-card::after {
+    content: '';
+    position: absolute; bottom: -40px; right: -40px;
+    width: 120px; height: 120px;
+    background: rgba(123,94,167,0.08);
+    border-radius: 50%;
+  }
+  .problem-icon {
+    width: 52px; height: 52px; border-radius: 16px;
+    background: linear-gradient(135deg, var(--violet-light), var(--violet));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 20px;
+  }
+  .problem-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600; margin-bottom: 12px; color: var(--text-dark);
+  }
+  .problem-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--violet-pale); }
+  .services-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  .services-grid { display: grid; gap: 20px; margin-top: 0; }
+  .service-card {
+    background: #fff;
+    border-radius: 20px; padding: 32px;
+    display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(123,94,167,0.08);
+  }
+  .service-card:hover {
+    transform: translateX(6px);
+    box-shadow: -4px 0 0 var(--violet), 4px 8px 30px rgba(0,0,0,0.06);
+  }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300;
+    color: var(--violet-pale); line-height: 1;
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px;
+  }
+  .service-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .service-tag {
+    background: var(--violet-pale); color: var(--violet);
+    font-size: 12px; padding: 4px 12px; border-radius: 20px;
+  }
+  .service-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--violet); font-size: 14px; font-weight: 500;
+    text-decoration: none; margin-top: 16px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .service-cta:hover { border-color: var(--violet-light); }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--white); }
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-photo-wrap {
+    position: relative;
+  }
+  .about-photo-placeholder {
+    width: 100%; height: 500px;
+    background: linear-gradient(160deg, var(--beige) 0%, var(--beige-dark) 100%);
+    border-radius: 200px 200px 24px 24px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-light); font-size: 14px; text-align: center;
+  }
+  .about-badge-wrap {
+    position: absolute; bottom: 24px; left: -30px;
+    background: var(--violet); color: #fff;
+    border-radius: 20px; padding: 20px 24px;
+    box-shadow: 0 12px 40px rgba(123,94,167,0.35);
+  }
+  .about-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300; line-height: 1;
+  }
+  .about-badge-label { font-size: 12px; opacity: 0.8; margin-top: 4px; }
+  .about-credentials { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .credential {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px; background: var(--beige);
+    border-radius: 16px;
+  }
+  .credential-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--violet-light), var(--violet));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .credential-title { font-size: 15px; font-weight: 500; color: var(--text-dark); margin-bottom: 4px; }
+  .credential-text { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+
+  /* ─── WHY ─── */
+  #why {
+    background: var(--text-dark);
+    color: #fff; text-align: center;
+  }
+  #why .section-title { color: #fff; }
+  #why .section-label { color: var(--violet-light); }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 60px; }
+  .why-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 32px 24px; text-align: center;
+    transition: background 0.2s;
+  }
+  .why-card:hover { background: rgba(123,94,167,0.2); }
+  .why-icon { font-size: 36px; margin-bottom: 16px; }
+  .why-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+  .why-text { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+  /* ─── FREE CONSULT ─── */
+  #free-consult {
+    background: linear-gradient(135deg, var(--violet) 0%, #5f4690 100%);
+    color: #fff; text-align: center; padding: 80px;
+  }
+  #free-consult .section-label { color: rgba(255,255,255,0.6); }
+  #free-consult .section-title { color: #fff; }
+  #free-consult .section-desc { color: rgba(255,255,255,0.75); margin: 0 auto; }
+  .free-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; font-size: 12px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 8px 20px; border-radius: 30px;
+    margin-bottom: 24px;
+  }
+  #free-consult .btn-primary {
+    background: #fff; color: var(--violet);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    margin: 40px auto 0; display: inline-flex;
+  }
+  #free-consult .btn-primary:hover { background: var(--beige); }
+
+  /* ─── CONTACTS ─── */
+  #contacts { background: var(--beige); }
+  .contacts-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-links { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 16px;
+    background: #fff; border-radius: 16px; padding: 20px 24px;
+    text-decoration: none; color: var(--text-dark);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(123,94,167,0.1);
+  }
+  .contact-link:hover { transform: translateX(6px); box-shadow: 4px 4px 24px rgba(0,0,0,0.06); }
+  .contact-link-icon {
+    width: 44px; height: 44px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .contact-link-icon.wa { background: #25D366; }
+  .contact-link-icon.ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .contact-link-text strong { display: block; font-size: 15px; font-weight: 500; }
+  .contact-link-text span { font-size: 13px; color: var(--text-light); }
+  .contact-form-placeholder {
+    background: #fff; border-radius: 24px; padding: 40px;
+    border: 1px solid rgba(123,94,167,0.1);
+  }
+  .contact-form-placeholder h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400; margin-bottom: 8px;
+  }
+  .contact-form-placeholder p { font-size: 14px; color: var(--text-light); margin-bottom: 28px; }
+  .form-row { margin-bottom: 16px; }
+  .form-row input, .form-row textarea {
+    width: 100%; padding: 14px 18px;
+    border: 1.5px solid var(--beige-dark);
+    border-radius: 12px; font-family: 'Jost', sans-serif;
+    font-size: 15px; color: var(--text-dark);
+    background: var(--white); outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+  .form-row input:focus, .form-row textarea:focus { border-color: var(--violet-light); }
+  .form-row input::placeholder, .form-row textarea::placeholder { color: var(--text-light); }
+  .form-submit {
+    width: 100%; padding: 15px;
+    background: var(--violet); color: #fff;
+    border: none; border-radius: 35px;
+    font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 500;
+    cursor: pointer; transition: background 0.2s, transform 0.2s;
+  }
+  .form-submit:hover { background: #5f4690; transform: translateY(-1px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--text-dark); color: rgba(255,255,255,0.5);
+    padding: 32px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: #fff; font-weight: 600;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-text > * {
+    animation: fadeUp 0.7s ease forwards;
+    opacity: 0;
+  }
+  .hero-badge { animation-delay: 0.1s; }
+  .hero-title { animation-delay: 0.25s; }
+  .hero-subtitle { animation-delay: 0.4s; }
+  .hero-cta-group { animation-delay: 0.55s; }
+  .hero-stats { animation-delay: 0.7s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 70px 24px; }
+    #hero { grid-template-columns: 1fr; text-align: center; }
+    .hero-text { padding: 60px 24px 40px; align-items: center; }
+    .hero-image { display: none; }
+    .hero-stats { justify-content: center; }
+    .problems-grid { grid-template-columns: 1fr; }
+    .services-layout { grid-template-columns: 1fr; gap: 40px; }
+    .about-layout { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .contacts-layout { grid-template-columns: 1fr; gap: 40px; }
+    footer { flex-direction: column; gap: 12px; padding: 24px; }
+    #free-consult { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Капия Максутова</div>
+  <div class="nav-links">
+    <a href="#problems">Мои услуги</a>
+    <a href="#about">Обо мне</a>
+    <a href="#contacts">Контакты</a>
+    <a href="https://wa.me/77026781132" class="nav-cta" target="_blank">Записаться</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="hero-badge">Врач · Психолог · Коуч</span>
+    <h1 class="hero-title">
+      Помогаю восстановить<br>
+      <em>здоровье и энергию</em><br>
+      изнутри
+    </h1>
+    <p class="hero-subtitle">
+      Если вас беспокоят проблемы с ЖКТ, хроническая усталость или стресс — 
+      я помогу найти причину и устранить её. Не симптом, а корень.
+    </p>
+    <div class="hero-cta-group">
+      <a href="https://wa.me/77026781132" class="btn-primary" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.998l6.305-1.651C8.089 23.376 10.01 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.849 0-3.596-.505-5.101-1.382l-.366-.218-3.784.992 1.01-3.694-.239-.379C2.573 15.561 2.182 13.831 2.182 12 2.182 6.579 6.579 2.182 12 2.182c5.421 0 9.818 4.397 9.818 9.818 0 5.421-4.397 9.818-9.818 9.818z"/></svg>
+        Записаться в WhatsApp
+      </a>
+      <a href="#about" class="btn-secondary">Узнать больше →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">38</div>
+        <div class="stat-label">лет врачебного<br>опыта</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">специализации<br>в одном подходе</div>
+      </div>
+      <div>
+        <div class="stat-num">∞</div>
+        <div class="stat-label">внимание к каждому<br>пациенту</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-bg"></div>
+      <div class="hero-photo-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span>Фото Капии<br>здесь</span>
+      </div>
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        Принимает онлайн и очно
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMS -->
+<section id="problems">
+  <div class="section-label">Чем я помогаю</div>
+  <h2 class="section-title">Узнаёте <em>себя?</em></h2>
+  <p class="section-desc">Эти проблемы кажутся разными — но часто имеют одну причину. Я работаю с ней комплексно.</p>
+
+  <div class="problems-grid">
+    <div class="problem-card">
+      <div class="problem-icon">🫁</div>
+      <div class="problem-title">Проблемы с ЖКТ</div>
+      <p class="problem-text">Вздутие, тяжесть, изжога, нарушения пищеварения. Долго лечитесь, но симптомы возвращаются? Нужен не ещё один препарат — нужна система.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">⚡</div>
+      <div class="problem-title">Хроническая усталость</div>
+      <p class="problem-text">Встаёте уже уставшим. Нет сил к вечеру. Кофе не помогает. Это не лень — это сигнал тела. Разберёмся вместе с причиной.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🧠</div>
+      <div class="problem-title">Стресс и психосоматика</div>
+      <p class="problem-text">Тревога, нарушения сна, боли без видимой причины. Тело и психика говорят на одном языке — я умею их слышать.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-layout">
+    <div>
+      <div class="section-label">Услуги</div>
+      <h2 class="section-title">Единый <em>подход</em></h2>
+      <p class="section-desc">Не три отдельных специалиста — одна встреча, один взгляд, цельный результат.</p>
+      <br><br>
+      <a href="https://wa.me/77026781132" class="btn-primary" target="_blank" style="display:inline-flex;">
+        Записаться →
+      </a>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div>
+          <div class="service-name">Консультация гастроэнтеролога-диетолога</div>
+          <p class="service-desc">Диагностика состояния ЖКТ, разбор питания, составление индивидуального плана восстановления. 38 лет врачебной практики.</p>
+          <div class="service-tags">
+            <span class="service-tag">ЖКТ</span>
+            <span class="service-tag">Питание</span>
+            <span class="service-tag">Диета</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div>
+          <div class="service-name">Психологическая консультация</div>
+          <p class="service-desc">Работа со стрессом, тревогой, психосоматическими симптомами. Дипломированный психолог с 20-летним опытом.</p>
+          <div class="service-tags">
+            <span class="service-tag">Стресс</span>
+            <span class="service-tag">Тревога</span>
+            <span class="service-tag">Сон</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div>
+          <div class="service-name">Коучинг по здоровью и энергии</div>
+          <p class="service-desc">Системная работа над образом жизни: режим, энергия, мышление. Мастер коуч цифровой психологии.</p>
+          <div class="service-tags">
+            <span class="service-tag">Энергия</span>
+            <span class="service-tag">Режим</span>
+            <span class="service-tag">Привычки</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-layout">
+    <div class="about-photo-wrap">
+      <div class="about-photo-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--beige-dark)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="about-badge-wrap">
+        <div class="about-badge-num">38</div>
+        <div class="about-badge-label">лет опыта</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Обо мне</div>
+      <h2 class="section-title">Капия<br><em>Максутова</em></h2>
+      <p class="section-desc" style="margin-bottom: 32px;">
+        Я верю, что здоровье — это не отсутствие болезни, а состояние, когда тело и психика работают в согласии. 
+        Именно поэтому за 38 лет я не остановилась на медицине — я добавила психологию и коучинг, чтобы видеть человека целиком.
+      </p>
+      <p class="section-desc">
+        Мои пациенты приходят с «неудобными» вопросами, на которые другие врачи не дают ответа. Мы разбираемся вместе.
+      </p>
+
+      <div class="about-credentials">
+        <div class="credential">
+          <div class="credential-icon">🩺</div>
+          <div>
+            <div class="credential-title">Гастроэнтеролог-диетолог</div>
+            <div class="credential-text">38 лет практики. Глубокое понимание того, как питание влияет на всё тело.</div>
+          </div>
+        </div>
+        <div class="credential">
+          <div class="credential-icon">🧠</div>
+          <div>
+            <div class="credential-title">Дипломированный психолог</div>
+            <div class="credential-text">20 лет работы. Умею находить связь между эмоциями и физическими симптомами.</div>
+          </div>
+        </div>
+        <div class="credential">
+          <div class="credential-icon">✨</div>
+          <div>
+            <div class="credential-title">Мастер коуч цифровой психологии</div>
+            <div class="credential-text">5 лет. Системная работа с образом жизни, целями и внутренними ресурсами.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-label">Почему доверяют</div>
+  <h2 class="section-title" style="margin: 0 auto;">Мой <em>подход</em> отличается</h2>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🔍</div>
+      <div class="why-title">Ищу причину, а не симптом</div>
+      <p class="why-text">Не назначаю таблетки «в лоб». Разбираемся, откуда взялась проблема.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🤝</div>
+      <div class="why-title">Один специалист — три экспертизы</div>
+      <p class="why-text">Не нужно бегать по трём кабинетам. Всё — в одной консультации.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💬</div>
+      <div class="why-title">Слушаю и слышу</div>
+      <p class="why-text">Каждый пациент уникален. Нет шаблонных схем — есть ваша ситуация.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📈</div>
+      <div class="why-title">Долгосрочный результат</div>
+      <p class="why-text">Работаю не на разовое улучшение, а на устойчивое изменение качества жизни.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FREE CONSULT -->
+<section id="free-consult">
+  <div class="free-badge">🎁 Специальное предложение</div>
+  <h2 class="section-title">Первичная консультация — бесплатно</h2>
+  <p class="section-desc">
+    15 минут, чтобы познакомиться, понять вашу ситуацию и решить, чем я могу помочь. 
+    Без давления и обязательств.
+  </p>
+  <a href="https://wa.me/77026781132" class="btn-primary" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.998l6.305-1.651C8.089 23.376 10.01 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.849 0-3.596-.505-5.101-1.382l-.366-.218-3.784.992 1.01-3.694-.239-.379C2.573 15.561 2.182 13.831 2.182 12 2.182 6.579 6.579 2.182 12 2.182c5.421 0 9.818 4.397 9.818 9.818 0 5.421-4.397 9.818-9.818 9.818z"/></svg>
+    Записаться бесплатно в WhatsApp
+  </a>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts">
+  <div class="contacts-layout">
+    <div>
+      <div class="section-label">Контакты</div>
+      <h2 class="section-title">Свяжитесь<br>со <em>мной</em></h2>
+      <p class="section-desc">Напишите в WhatsApp — отвечаю лично. Можно просто написать "хочу на консультацию" и я отвечу.</p>
+
+      <div class="contact-links">
+        <a href="https://wa.me/77026781132" class="contact-link" target="_blank">
+          <div class="contact-link-icon wa">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.998l6.305-1.651C8.089 23.376 10.01 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.849 0-3.596-.505-5.101-1.382l-.366-.218-3.784.992 1.01-3.694-.239-.379C2.573 15.561 2.182 13.831 2.182 12 2.182 6.579 6.579 2.182 12 2.182c5.421 0 9.818 4.397 9.818 9.818 0 5.421-4.397 9.818-9.818 9.818z"/></svg>
+          </div>
+          <div class="contact-link-text">
+            <strong>WhatsApp</strong>
+            <span>+7 702 678 1132</span>
+          </div>
+        </a>
+        <a href="https://instagram.com/maksutova_kapiya" class="contact-link" target="_blank">
+          <div class="contact-link-icon ig">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div class="contact-link-text">
+            <strong>Instagram</strong>
+            <span>@maksutova_kapiya</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-form-placeholder">
+      <h3>Напишите мне</h3>
+      <p>Оставьте имя и телефон — я сама свяжусь с вами</p>
+      <div class="form-row">
+        <input type="text" placeholder="Ваше имя">
+      </div>
+      <div class="form-row">
+        <input type="tel" placeholder="Номер телефона / WhatsApp">
+      </div>
+      <div class="form-row">
+        <textarea rows="3" placeholder="С чем хотите обратиться? (необязательно)"></textarea>
+      </div>
+      <button class="form-submit" onclick="window.open('https://wa.me/77026781132','_blank')">
+        Отправить в WhatsApp →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Капия Максутова</div>
+  <div>© 2025 · Врач, психолог, коуч · Комплексный подход к здоровью</div>
+  <a href="https://wa.me/77026781132" style="color: var(--violet-light); text-decoration: none;">+7 702 678 1132</a>
+</footer>
+
+</body>
+</html>
